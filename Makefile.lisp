@@ -2,12 +2,12 @@
 
 all: install
 
-install: org-handler.sbcl
-	cp $< ${HOME}/bin/$<
+install: bld/org-handler.sbcl
+	cp $< ${HOME}/bin/$(notdir $<)
 
-org-handler.sbcl: org-handler.lisp
+bld/org-handler.sbcl: org-handler.lisp
 	sbcl --load org-handler.lisp --eval "(sb-ext:save-lisp-and-die \"$@\" :executable t :toplevel #'main)"
 
 
 clean:
-	git clean -f
+	rm bld/org-handler.sbcl
