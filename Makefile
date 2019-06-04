@@ -2,9 +2,12 @@
 
 all: install
 
-install: org-handler
-	cp $< ${HOME}/bin/$<
+install: bld/org-handler
+	cp $< ${HOME}/bin/$(notdir $<)
 
-org-handler: org-handler.scm 
-	csc -O3 $<
+bld/org-handler: org-handler.scm 
+	csc -O3 $< -o $@
 
+
+clean:
+	rm bld/org-handler
